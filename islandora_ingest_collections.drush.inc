@@ -4,9 +4,7 @@
  * @file
  * Drush integration file for the Islandora Ingest Collections program.
  */
-define('DELIMITER',',');
-define('ENCLOSURE','"');
-define('ESCAPE','"');
+
 /**
  * Implements hook_drush_help().
  */
@@ -49,30 +47,15 @@ function islandora_ingest_collections_drush_command() {
  */
 function drush_islandora_ingest_collections_create_islandora_collections_from_dsv() {
     try {
-      $params = array(
-        'input' => drush_get_option('input'),
-        'create_node' => drush_get_option('create_node', FALSE),
-      );
+        $params = array(
+            'input' => drush_get_option('input'),
+            'create_node' => drush_get_option('create_node', FALSE),
+        );
 
-
-      if (!file_exists($params['input'])) {
-        return drush_set_error(dt("Can't find data file at @path.", array('@path' => $params['input'])));
-      }
-      $islandoraSimpleDSVCollectionPopulator = new edu\utk\islandora\ingest\collections\IslandoraSimpleDSVCollectionPopulator($params['create_node']);
-      $collections_data = retrieve_data_from_dsv($params['input']);
-      foreach ($collections_data as $data) {
-          $simpleDSVCollection =  new edu\utk\islandora\ingest\collections\SimpleDSVCollection($data);
-            try {
-                $islandoraSimpleDSVCollectionPopulator->islandoraIngestCollection($simpleDSVCollection);
-            } catch (Exception $e) {
-                drupal_set_message(t('Error ingesting Islandora collection object %t (PID %p).',
-                    array('%t' => $simpleDSVCollection->getLabel(), 
-                          '%p' => $simpleDSVCollection->getPid()), 'error'));
-                watchdog('create_islandora_collections_from_dsv', 'Error ingesting Islandora collection object %t (PID %p).',
-                    array('%t' => $simpleDSVCollection->getLabel(), 
-                         '%p' => $simpleDSVCollection->getPid()), WATCHDOG_ERROR);
-            }
-      }
+        if (!file_exists($params['input'])) {
+            return drush_set_error(dt("Can't find data ;file at @path.", array('@path' => $params['input'])));
+        }
+        populateIslandoraCollectionFromDsv($params);
     } catch (Exception $e) {
       drupal_set_message(t('Error ingesting Islandora collections. %t',
         array('%t' => $e->getMessage()), 'error'));

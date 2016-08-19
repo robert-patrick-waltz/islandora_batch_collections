@@ -19,7 +19,7 @@
 
 */
 
-namespace edu\utk\islandora\ingest\collections;
+namespace utkdigitalinitiatives\islandora\ingest\collections;
 /**
  * SimpleDSVCollection assigns very basic properties to create a simple
  * Islandora Collection.  Extend the class if more properties are needed, or
