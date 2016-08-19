@@ -1,0 +1,8 @@
+name = Islandora Batch Ingest Collections Program
+description = "Utility module for creating collections in Islandora."
+package = Islandora Tools
+version = 7.x-dev
+core = 7.x
+dependencies[] = islandora
+dependencies[] = islandora_basic_collection
+files[] = includes/SimpleDSVCollection.php
