@@ -29,9 +29,9 @@ class IslandoraSimpleDSVCollectionPopulator
 {
     private $doIslandoraIngestDsvNode = FALSE;
     private $tuque;
-    public function __construct(bool $islandoraIngestNode = FALSE) {
+    public function __construct($islandora_tuque, bool $islandoraIngestNode = FALSE  ) {
         $this->doIslandoraIngestDsvNode = $islandoraIngestNode;
-        $this->tuque = new \IslandoraTuque();
+        $this->tuque = $islandora_tuque;
     }
     /**
      * Ingest an Islandora collection object.
@@ -42,7 +42,7 @@ class IslandoraSimpleDSVCollectionPopulator
     public function islandoraIngestCollection(SimpleDSVCollection $dsvCollection) 
     {
         try {
-            $repository = $tuque->repository;
+            $repository = $this->tuque->repository;
             $collection_object = $repository->constructObject($dsvCollection->getPid());
             $collection_object->label = $dsvCollection->getLabel();
 
@@ -130,7 +130,7 @@ class IslandoraSimpleDSVCollectionPopulator
         }
 
         // Create the node object.
-        $node = new \stdClass();
+        $node = new stdClass();
         $node->title = trim($collection_data[1]);
         $node->type = $content_type;
         $node->status = 1;
@@ -192,13 +192,11 @@ class IslandoraSimpleDSVCollectionPopulator
         $content_type = preg_replace('/[^a-zA-Z0-9]+/', '_', $content_type);
         if ($content_type) {
             if (!$type = \node_type_load($content_type)) {
-              return drush_set_error(dt("Can't find the content type @type.",
-                array('@type' => $content_type)));
+                throw Exception("Can't find the content type $content_type.");
             }
 
             if (!$type->has_title) {
-              return drush_set_error(dt("Content type @type has no title field.",
-                array('@type' => $content_type)));
+              throw Exception("Content type $content_type has no title field.");
             }
 
             $required_fields = array(
@@ -210,8 +208,7 @@ class IslandoraSimpleDSVCollectionPopulator
             $fields = \field_info_instances('node', $content_type);
             foreach ($required_fields as $required_field) {
               if (!array_key_exists($required_field, $fields)) {
-                return drush_set_error(dt("Content type @type has no @field field.",
-                  array('@type' => $content_type, '@field' => $required_field)));
+                  throw Exception("Content type $content_type has no $required_field field.");
               }
             }
         }

@@ -84,7 +84,7 @@ EOCP;
   <language>
     <languageTerm authority="iso639-2b" type="code">eng</languageTerm>
   </language>
-  <abstract>$this->mods_description</abstract>
+  <abstract>$this->modsDescription</abstract>
   <identifier type="local">$this->pid</identifier>
 </mods>
 EODC;
@@ -191,29 +191,29 @@ EODC;
     }
 
     function  validate_dsv_data($dsv_data) { 
-    if (count($collection_data) < 7 ) {
-        throw Exception("There must be a minimum of 5 columns in the Delimiter Separated Value file");
+        if (count($dsv_data) < 7 ) {
+            throw Exception("There must be a minimum of 5 columns in the Delimiter Separated Value file");
+        }
+        if (strlen($dsv_data[0]) == 0)  {
+            throw new Exception("The parent object identifier column must contain a value");
+        }
+        if (empty(\islandora_object_load($dsv_data[0]))) {
+            throw new Exception("The specified parent object $dsv_data[0] is not found or is not accessible.");
+        }
+        if (strlen($dsv_data[1]) ==0) {
+            throw new Exception("The namespace column must contain a value");
+        }
+        if (strlen($dsv_data[2]) ==0) {
+            throw new Exception("The object identifier column must contain a value");
+        }
+        if (strlen($dsv_data[3]) ==0) {
+            throw new Exception("The label column must contain a value");
+        }
+        if (strlen($dsv_data[5]) ==0) {
+            throw new Exception("The MODS description column must contain a value");
+        }
+        if (strlen($dsv_data[6]) ==0) {
+            throw new Exception("The  MODS Type of Resource column must contain a value");
+        }
     }
-    if (strlen($collection_data[0]) == 0)  {
-        throw new Exception("The parent object identifier column must contain a value");
-    }
-    if (empty(\islandora_object_load($collection_data[0]))) {
-        throw new Exception("The specified parent object $collection_data[0] is not found or is not accessible.");
-    }
-    if (strlen($collection_data[1]) ==0) {
-        throw new Exception("The namespace column must contain a value");
-    }
-    if (strlen($collection_data[2]) ==0) {
-        throw new Exception("The object identifier column must contain a value");
-    }
-    if (strlen($collection_data[3]) ==0) {
-        throw new Exception("The label column must contain a value");
-    }
-    if (strlen($collection_data[5]) ==0) {
-        throw new Exception("The MODS description column must contain a value");
-    }
-    if (strlen($collection_data[6]) ==0) {
-        throw new Exception("The  MODS Type of Resource column must contain a value");
-    }
-}
  }

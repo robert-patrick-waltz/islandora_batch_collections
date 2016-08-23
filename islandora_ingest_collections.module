@@ -10,8 +10,9 @@ define('ESCAPE','"');
  * 
  */
 function populateIslandoraCollectionFromDsv($params) {
-    $islandoraSimpleDSVCollectionPopulator = new utkdigitalinitiatives\islandora\ingest\collections\IslandoraSimpleDSVCollectionPopulator($params['create_node']);
-    $collections_data = retrieve_data_from_dsv($params['input']);
+    $islandoraTuque = new IslandoraTuque();
+    $islandoraSimpleDSVCollectionPopulator = new utkdigitalinitiatives\islandora\ingest\collections\IslandoraSimpleDSVCollectionPopulator($islandoraTuque, $params['create_node']);
+    $collections_data = retrieveDataFromDsv($params['input']);
     foreach ($collections_data as $data) {
         $simpleDSVCollection =  new utkdigitalinitiatives\islandora\ingest\collections\SimpleDSVCollection($data);
           try {
