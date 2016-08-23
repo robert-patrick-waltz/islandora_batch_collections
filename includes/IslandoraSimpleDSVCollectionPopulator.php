@@ -89,7 +89,7 @@ class IslandoraSimpleDSVCollectionPopulator
             array('%t' => $dsvCollection->getLabel(), '%p' => $dsvCollection->getPid()), WATCHDOG_ERROR);
         }
         if ($this->doIslandoraIngestDsvNode) {
-            $this->islandoraIngestDsvNode(dsvCollection);
+            $this->islandoraIngestDsvNode($dsvCollection);
         }
     }
 
@@ -116,7 +116,7 @@ class IslandoraSimpleDSVCollectionPopulator
     private function islandoraIngestDsvNode(SimpleDSVCollection $dsvCollection) 
     {
        $thumbnail_filepath = $this->getCompleteThumbnailPath($dsvCollection->getThumbnailFilepath());
-
+       $file = NULL;
         if (file_exists($thumbnail_filepath)) {
             unset($file);
             $file = \file_save_data(file_get_contents($thumbnail_filepath),
@@ -130,15 +130,16 @@ class IslandoraSimpleDSVCollectionPopulator
         }
 
         // Create the node object.
-        $node = new stdClass();
-        $node->title = trim($collection_data[1]);
-        $node->type = $content_type;
+        $node = new \stdClass();
+        $node->title = trim($dsvCollection->getLabel());
+        $node->type = $dsvCollection->getDrupalContentType();
         $node->status = 1;
         $node->promote = 0;
         $node->sticky = 0;
         $node->language = LANGUAGE_NONE;
         $node->uid = 1;
-        if (array_key_exists(3, $collection_data)) {
+        
+        if (strlen($dsvCollection->getThumbnailFilepath()) > 0) {
           $node->field_thumbnail[LANGUAGE_NONE][0] = (array) $file;
         }
 
@@ -146,9 +147,9 @@ class IslandoraSimpleDSVCollectionPopulator
 
         $node->field_cdm_alias[LANGUAGE_NONE][0]['value'] = $dsvCollection->getLabel();
         
-        if (array_key_exists(2, $collection_data)) {
+        if (strlen($dsvCollection->getModsDescription() > 0)) {
           $node->field_description[LANGUAGE_NONE][0]['value'] = $dsvCollection->getModsDescription();
-          $node->field_description[LANGUAGE_NONE][0]['format'] = 'full_html';
+          $node->field_description[LANGUAGE_NONE][0]['format'] = 'plain_text';
         }
 
         // Save the node.
