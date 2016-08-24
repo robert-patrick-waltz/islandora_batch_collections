@@ -46,10 +46,8 @@ function islandora_ingest_collections_drush_command() {
  * Callback function for drush create-islandora-collections-from-dsv.
  */
 function drush_islandora_ingest_collections_create_islandora_collections_from_dsv() {
-      module_load_include('php', 'islandora_ingest_collections', 'includes/Islan
-doraSimpleDSVCollectionPopulator');
-      module_load_include('php', 'islandora_ingest_collections', 'includes/Simpl
-eDSVCollection');
+    module_load_include('php','islandora_ingest_collections','includes/IslandoraSimpleDSVCollectionPopulator');
+    module_load_include('php','islandora_ingest_collections','includes/SimpleDSVCollection');
     try {
         $params = array(
             'input' => drush_get_option('input'),
