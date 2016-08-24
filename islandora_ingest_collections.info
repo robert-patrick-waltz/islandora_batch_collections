@@ -1,5 +1,5 @@
-name = Islandora Batch Ingest Collections Program
-description = "Utility module for creating collections in Islandora."
+name = Islandora Ingest Collections Module
+description = "Utility module for uploading collections into Islandora with a DSV."
 package = Islandora Tools
 version = 7.x-dev
 core = 7.x
