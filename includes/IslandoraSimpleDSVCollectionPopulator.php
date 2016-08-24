@@ -29,7 +29,7 @@ class IslandoraSimpleDSVCollectionPopulator
 {
     private $doIslandoraIngestDsvNode = FALSE;
     private $tuque;
-    public function __construct($islandora_tuque, bool $islandoraIngestNode = FALSE  ) {
+    public function __construct($islandora_tuque, $islandoraIngestNode = FALSE  ) {
         $this->doIslandoraIngestDsvNode = $islandoraIngestNode;
         $this->tuque = $islandora_tuque;
     }
@@ -116,7 +116,7 @@ class IslandoraSimpleDSVCollectionPopulator
     private function islandoraIngestDsvNode(SimpleDSVCollection $dsvCollection) 
     {
        $thumbnail_filepath = $this->getCompleteThumbnailPath($dsvCollection->getThumbnailFilepath());
-       $file = NULL;
+       $file = N;
         if (file_exists($thumbnail_filepath)) {
             unset($file);
             $file = \file_save_data(file_get_contents($thumbnail_filepath),
