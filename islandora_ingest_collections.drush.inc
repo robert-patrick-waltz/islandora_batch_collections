@@ -28,8 +28,8 @@ function islandora_ingest_collections_drush_command() {
         'required' => 'TRUE',
       ),
       'create_node' => array(
-        'description' => 'Create a Drupal node for each collection ' .
-        'Defaults to TRUE.',
+        'description' => 'Create a Drupal node for each collection. Value is either TRUE or FALSE. ' .
+        'Defaults to FALSE.',
       ),
     ),
     'examples' => array(
@@ -49,9 +49,17 @@ function drush_islandora_ingest_collections_create_islandora_collections_from_ds
     module_load_include('php','islandora_ingest_collections','includes/IslandoraSimpleDSVCollectionPopulator');
     module_load_include('php','islandora_ingest_collections','includes/SimpleDSVCollection');
     try {
+        $create_node = drush_get_option('create_node', FALSE);
+        if ($create_node && ($create_node == 'TRUE')) {
+            $create_node = TRUE;
+        } else if ($create_node && ($create_node == 'FALSE')) {
+            $create_node = FALSE;
+        } else if ($create_node) {
+            throw new Exception("if --create_node is used, then it must either be equal to 'TRUE' or 'FALSE'");
+        }
         $params = array(
             'input' => drush_get_option('input'),
-            'create_node' => drush_get_option('create_node', FALSE),
+            'create_node' => $create_node,
         );
 
         if (!file_exists($params['input'])) {
