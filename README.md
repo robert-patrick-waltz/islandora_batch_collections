@@ -15,6 +15,7 @@ The DSV file must be contain the proper fields and the correct number of fields 
 ### Step 1: Creating a DSV file
 
 The DSV file must contain the following fields in the exact order shown below:
+
 parentPID | objectNamespace | objectId | fedoraLabel | modsDescription | modsTypeOfResource | drupalContentType | thumbnailFilepath
 
 The parentPID is the fedora parent pid of the new collection object to be created
@@ -53,8 +54,11 @@ Options are:
  * `--create_node`: (Optional) Create a node for each collection. Defaults to "page". The content type must exist and must be configured as described below.
 
 The default delimiter for the delimiter separated file is ','.
+
 The default enclosure for the delimiter separated file is '"'.
+
 The default escape for the delimiter separated file is '"'.
+
 Any of these settings may be modified by changing the global definitions in the islandora_ingest_collections.module file.
 
 If there are no thumbnail images in the collection data directory, or if the drush script can't find an image identified in the delimiter separated file (due to a mismatching filename, for example), the newly created collection is assigned the default thumbnail image provided by the Islandora Collection Solution Pack.
