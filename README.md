@@ -70,7 +70,7 @@ If you include the `--create_node` option, the drush script will create a Drupal
 
  * title
  * cdm_alias (field type = Text, widget = Text field)
- * description (field type = Long text, widget = Textarea (multiple rows); make the default input format "Full HMTL")
+ * description (field type = Long text, widget = Textarea (multiple rows); make the default input format "Plain Text")
  * thumbnail (field type = Image, widget = Image)
  * pid (field type = Text, widget = Text field)
 
