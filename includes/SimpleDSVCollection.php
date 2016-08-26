@@ -57,11 +57,12 @@ class SimpleDSVCollection {
         $this->objectId = $collection_data[2];
         $this->pid = $this->namespace . ':' . $this->objectId;
         $this->label = trim($collection_data[3]);
-        if (strlen(trim($collection_data[4])) > 0) {
-            $this->drupalContentType = trim($collection_data[4]);
+        $this->modsDescription = trim($collection_data[4]);
+        $this->modsTypeOfResource = trim($collection_data[5]);
+        
+        if (strlen(trim($collection_data[6])) > 0) {
+            $this->drupalContentType = trim($collection_data[6]);
         }
-        $this->modsDescription = trim($collection_data[5]);
-        $this->modsTypeOfResource = trim($collection_data[6]);
         if (strlen(trim($collection_data[7])) > 0) {
             $this->thumbnailFilepath = trim($collection_data[7]);
         }
@@ -209,10 +210,10 @@ EODC;
         if (strlen($dsv_data[3]) ==0) {
             throw new Exception("The label column must contain a value");
         }
-        if (strlen($dsv_data[5]) ==0) {
+        if (strlen($dsv_data[4]) ==0) {
             throw new Exception("The MODS description column must contain a value");
         }
-        if (strlen($dsv_data[6]) ==0) {
+        if (strlen($dsv_data[5]) ==0) {
             throw new Exception("The  MODS Type of Resource column must contain a value");
         }
     }

@@ -36,7 +36,7 @@ function islandora_ingest_collections_drush_command() {
       'Standard example' => 'drush --user=admin create-islandora-collections-from-dsv   --input=/tmp/cdmcollectiondata/collection_data.dsv',
       'Alias example' => 'drush --user=admin cicfc  --input=/tmp/cdmcollectiondata/collection_data.tsv',
     ),
-    'aliases' => array('cicfc'),
+    'aliases' => array('cicfd'),
     'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_LOGIN,
   );
   return $items;
