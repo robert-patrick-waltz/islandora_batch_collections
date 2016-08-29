@@ -68,7 +68,10 @@ class SimpleDSVCollection {
         }
         $this->collectionPolicyXml = <<<EOCP
 <collection_policy xmlns="http://www.islandora.ca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="$this->label" xsi:schemaLocation="http://www.islandora.ca http://syn.lib.umanitoba.ca/collection_policy.xsd">
-<content_models/>
+<content_models>
+    <content_model name="Islandora PDF Content Model" dsid="" namespace="islandora" pid="islandora:sp_pdf"/>
+    <content_model name="Thesis Content Model" dsid="" namespace="islandora" pid="ir:thesisCModel"/>
+ </content_models>
 <search_terms/>
 <staging_area/>
 <relationship>isMemberOfCollection</relationship>
