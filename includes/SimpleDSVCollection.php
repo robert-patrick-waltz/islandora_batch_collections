@@ -67,18 +67,18 @@ class SimpleDSVCollection {
             $this->thumbnailFilepath = trim($collection_data[7]);
         }
         $this->collectionPolicyXml = <<<EOCP
-<collection_policy xmlns="http://www.islandora.ca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="$this->label" xsi:schemaLocation="http://www.islandora.ca http://syn.lib.umanitoba.ca/collection_policy.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<collection_policy xmlns="http://www.islandora.ca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="$this->label" xsi:schemaLocation="http://www.islandora.ca https://raw.githubusercontent.com/Islandora/islandora_solution_pack_collection/7.x/xml/collection_policy.xsd">
 <content_models>
-    <content_model name="Islandora PDF Content Model" dsid="" namespace="islandora" pid="islandora:sp_pdf"/>
-    <content_model name="Thesis Content Model" dsid="" namespace="islandora" pid="ir:thesisCModel"/>
+    <content_model name="Thesis" dsid="" namespace="islandora" pid="ir:thesisCModel"/>
  </content_models>
 <search_terms/>
 <staging_area/>
 <relationship>isMemberOfCollection</relationship>
 </collection_policy>
 EOCP;
-        $this->modsXml = <<<EODC
-<?xml version="1.0"?>
+        $this->modsXml = <<<EOMODS
+<?xml version="1.0" encoding="UTF-8"?>
 <mods xmlns="http://www.loc.gov/mods/v3" xmlns:mods="http://www.loc.gov/mods/v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink">
   <titleInfo>
     <title>$this->label</title>
@@ -91,7 +91,7 @@ EOCP;
   <abstract>$this->modsDescription</abstract>
   <identifier type="local">$this->pid</identifier>
 </mods>
-EODC;
+EOMODS;
     }
     
     /** 

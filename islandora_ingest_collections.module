@@ -1,8 +1,8 @@
 <?php
 
-define('DELIMITER',',');
-define('ENCLOSURE','"');
-define('ESCAPE','"');
+define('ISLANDORA_INGEST_COLLECTIONS_DELIMITER',',');
+define('ISLANDORA_INGEST_COLLECTIONS_ENCLOSURE','"');
+define('ISLANDORA_INGEST_COLLECTIONS_ESCAPE','"');
 /*
  * Retrieve the data from a DSV file, then for every entry
  * create a islandora collection 
@@ -53,8 +53,8 @@ function populateIslandoraCollectionFromDsv($params) {
  *   The Default is '"', provides use of enclosure char with in data cell data
  * 
  */
-function retrieveDataFromDsv($data_file_path, $delimiter_char = DELIMITER, 
-            $enclosure_char = ENCLOSURE, $escape_char = ESCAPE) {
+function retrieveDataFromDsv($data_file_path, $delimiter_char = ISLANDORA_INGEST_COLLECTIONS_DELIMITER, 
+            $enclosure_char = ISLANDORA_INGEST_COLLECTIONS_ENCLOSURE, $escape_char = ISLANDORA_INGEST_COLLECTIONS_ESCAPE) {
     $dsv_data = array();
     if (($data_file_handle = fopen($data_file_path, "r")) !== FALSE) {
         while (($dsv_row = fgetcsv($data_file_handle, 0, $delimiter_char,
