@@ -7,3 +7,4 @@ dependencies[] = islandora
 dependencies[] = islandora_basic_collection
 files[] = includes/SimpleDSVCollection.php
 files[] = includes/IslandoraSimpleDSVCollectionPopulator.php
+files[] = includes/IslandoraFedoraObjectLabelCache.php

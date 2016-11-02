@@ -74,7 +74,14 @@ class IslandoraSimpleDSVCollectionPopulator
 
             // Add relationships.
             $rels = $collection_object->relationships;
-            $rels->add('info:fedora/fedora-system:def/relations-external#', 'isMemberOfCollection', $dsvCollection->getParent(), FALSE);
+            
+            // The root of the repository will not have a parent pid, but rather
+            // just the namespace of the repository
+            $parent = $dsvCollection->getParent();
+
+            if (substr_count($parent, ":") > 0) {
+                $rels->add('info:fedora/fedora-system:def/relations-external#', 'isMemberOfCollection', $dsvCollection->getParent(), FALSE);
+            }
             $rels->add('info:fedora/fedora-system:def/model#', 'hasModel', 'islandora:collectionCModel', FALSE);
 
             $repository->ingestObject($collection_object);

@@ -48,6 +48,7 @@ function islandora_ingest_collections_drush_command() {
 function drush_islandora_ingest_collections_create_islandora_collections_from_dsv() {
     module_load_include('php','islandora_ingest_collections','includes/IslandoraSimpleDSVCollectionPopulator');
     module_load_include('php','islandora_ingest_collections','includes/SimpleDSVCollection');
+    module_load_include('php','islandora_ingest_collections','includes/IslandoraFedoraObjectLabelCache');
     try {
         $create_node = FALSE;
         if (drush_get_option('create_node', FALSE)) {

@@ -13,8 +13,10 @@ function populateIslandoraCollectionFromDsv($params) {
     $islandoraTuque = new IslandoraTuque();
     $islandoraSimpleDSVCollectionPopulator = new utkdigitalinitiatives\islandora\ingest\collections\IslandoraSimpleDSVCollectionPopulator($islandoraTuque, $params['create_node']);
     $collections_data = retrieveDataFromDsv($params['input']);
+    $islandoraObjectModelLabelCache = new utkdigitalinitiatives\islandora\ingest\collections\IslandoraFedoraObjectLabelCache($islandoraTuque);
+
     foreach ($collections_data as $data) {
-        $simpleDSVCollection =  new utkdigitalinitiatives\islandora\ingest\collections\SimpleDSVCollection($data);
+        $simpleDSVCollection =  new utkdigitalinitiatives\islandora\ingest\collections\SimpleDSVCollection($data, $islandoraObjectModelLabelCache);
           try {
               $islandoraSimpleDSVCollectionPopulator->islandoraIngestCollection($simpleDSVCollection);
           } catch (Exception $e) {
@@ -57,8 +59,7 @@ function retrieveDataFromDsv($data_file_path, $delimiter_char = ISLANDORA_INGEST
             $enclosure_char = ISLANDORA_INGEST_COLLECTIONS_ENCLOSURE, $escape_char = ISLANDORA_INGEST_COLLECTIONS_ESCAPE) {
     $dsv_data = array();
     if (($data_file_handle = fopen($data_file_path, "r")) !== FALSE) {
-        while (($dsv_row = fgetcsv($data_file_handle, 0, $delimiter_char,
-                $enclosure_char,$escape_char)) !== FALSE) {
+        while (($dsv_row = fgetcsv($data_file_handle, 0, $delimiter_char, $enclosure_char,$escape_char)) !== FALSE) {
             $dsv_data[] = $dsv_row;
         }
     } else {
