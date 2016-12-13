@@ -65,7 +65,7 @@ function drush_islandora_ingest_collections_create_islandora_collections_from_ds
         populateIslandoraCollectionFromDsv($params);
     } catch (Exception $e) {
       drupal_set_message(t('Error ingesting Islandora collections. %t',
-        array('%t' => $e->getMessage()), 'error'));
+        array('%t' => $e->getMessage())), 'error');
       watchdog('Error ingesting Islandora collections. %t',
         array('%t' => $e->getMessage()), WATCHDOG_ERROR);
     }

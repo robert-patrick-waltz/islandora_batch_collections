@@ -91,7 +91,7 @@ class IslandoraSimpleDSVCollectionPopulator
               array('%t' => $dsvCollection->getLabel(), '%p' => $dsvCollection->getPid()), WATCHDOG_INFO);
         } catch (Exception $e) {
           \drupal_set_message(t('Error ingesting Islandora collection object %t (PID %p).',
-            array('%t' => $dsvCollection->getLabel(), '%p' => $dsvCollection->getPid()), 'error'));
+            array('%t' => $dsvCollection->getLabel(), '%p' => $dsvCollection->getPid())), 'error');
           \watchdog('islandora_migrate_cdm_collections', 'Error ingesting Islandora collection object %t (PID %p).',
             array('%t' => $dsvCollection->getLabel(), '%p' => $dsvCollection->getPid()), WATCHDOG_ERROR);
         }

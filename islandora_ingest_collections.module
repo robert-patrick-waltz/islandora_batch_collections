@@ -22,7 +22,7 @@ function populateIslandoraCollectionFromDsv($params) {
           } catch (Exception $e) {
               drupal_set_message(t('Error ingesting Islandora collection object %t (PID %p).',
                   array('%t' => $simpleDSVCollection->getLabel(), 
-                        '%p' => $simpleDSVCollection->getPid()), 'error'));
+                        '%p' => $simpleDSVCollection->getPid())), 'error');
               watchdog('create_islandora_collections_from_dsv', 'Error ingesting Islandora collection object %t (PID %p).',
                   array('%t' => $simpleDSVCollection->getLabel(), 
                        '%p' => $simpleDSVCollection->getPid()), WATCHDOG_ERROR);
