@@ -20,7 +20,7 @@ class IslandoraFedoraObjectLabelCache
     private $fedoraObjectCache = array();
     private $connection;
 
-    public function __construct(IslandoraTuque $tuque_connection) {
+    public function __construct($tuque_connection) {
         $this->connection = $tuque_connection;
     }
 

@@ -64,7 +64,7 @@ class SimpleDSVCollection {
 </collection_policy>
 EOCP;
 
-    public function __construct(array $collection_data, utkdigitalinitiatives\islandora\ingest\collections\IslandoraFedoraObjectLabelCache $islandoraFedoraObjectLabelCache) {
+    public function __construct( $collection_data,  $islandoraFedoraObjectLabelCache) {
         if (isset($islandoraFedoraObjectLabelCache)) {
             $this->objectLabelCache = $islandoraFedoraObjectLabelCache;
         } else {

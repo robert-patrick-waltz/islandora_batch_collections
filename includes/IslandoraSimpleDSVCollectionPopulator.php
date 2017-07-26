@@ -39,7 +39,7 @@ class IslandoraSimpleDSVCollectionPopulator
      * @param array $collection_data
      *   The configuration data for one CONTENTdm collection.
      */
-    public function islandoraIngestCollection(SimpleDSVCollection $dsvCollection) 
+    public function islandoraIngestCollection($dsvCollection)
     {
         try {
             $repository = $this->tuque->repository;
@@ -120,7 +120,7 @@ class IslandoraSimpleDSVCollectionPopulator
      * @param string $namespace
      *   The value of the --namespace Drush option.
      */
-    private function islandoraIngestDsvNode(SimpleDSVCollection $dsvCollection) 
+    private function islandoraIngestDsvNode($dsvCollection)
     {
        $thumbnail_filepath = $this->getCompleteThumbnailPath($dsvCollection->getThumbnailFilepath());
        $file = N;
