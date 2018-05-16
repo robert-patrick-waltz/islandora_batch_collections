@@ -60,7 +60,11 @@ function retrieveDataFromDsv($data_file_path, $delimiter_char = ISLANDORA_INGEST
     $dsv_data = array();
     if (($data_file_handle = fopen($data_file_path, "r")) !== FALSE) {
         while (($dsv_row = fgetcsv($data_file_handle, 0, $delimiter_char, $enclosure_char,$escape_char)) !== FALSE) {
-            $dsv_data[] = $dsv_row;
+            // validate the number of rows first before adding to the data stack
+            if (count($dsv_row) > 4) {
+              $dsv_data[] = $dsv_row;
+            }
+
         }
     } else {
         throw new Exception("Unable to open $data_file_path");

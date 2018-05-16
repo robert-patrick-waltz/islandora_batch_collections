@@ -27,10 +27,6 @@ function islandora_ingest_collections_drush_command() {
         'description' => 'The absolute path to the delimiter-separated file. ' ,
         'required' => 'TRUE',
       ),
-      'create_node' => array(
-        'description' => 'Create a Drupal node for each collection. Flag only. ' .
-        'Defaults to FALSE.',
-      ),
     ),
     'examples' => array(
       'Standard example' => 'drush --user=admin create-islandora-collections-from-dsv   --input=/tmp/cdmcollectiondata/collection_data.dsv',

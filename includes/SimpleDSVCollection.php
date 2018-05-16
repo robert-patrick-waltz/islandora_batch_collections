@@ -80,19 +80,14 @@ EOCP;
         $this->modsTypeOfResource = trim($collection_data[5]);
 
 
-        if (strlen(trim($collection_data[6])) > 0) {
-            $content_model_list = explode(',', trim($collection_data[6]));
+        if (strlen(trim($collection_data[4])) > 0) {
+            $content_model_list = explode(',', trim($collection_data[4]));
             for ($i = 0; $i < count($content_model_list); ++$i) {
                 $content_model_list[$i] = trim($content_model_list[$i]);
             }
             $this->contentModels = $content_model_list;
         }
-        if (strlen(trim($collection_data[7])) > 0) {
-            $this->drupalContentType = trim($collection_data[6]);
-        }
-        if (strlen(trim($collection_data[8])) > 0) {
-            $this->thumbnailFilepath = trim($collection_data[7]);
-        }
+
         // The namespace of each content model should be pid of the collection to create, substituting '.' for ':'
         $this->contentModelNamespace = $this->namespace . '.' . $this->objectId;
     }
@@ -192,7 +187,7 @@ EOCP;
 
             $content_models_nodelist = $collection_policy_dom->getElementsByTagName('content_models');
             if ($content_models_nodelist->length != 1) {
-                throw new \Exception("The static collection policy xml has more than one content_models element: " . $collectionPolicyXml);
+                throw new \Exception("The static collection policy xml has more than one content_models element: " . $this->collectionPolicyXml);
             }
             $content_models_node = $content_models_nodelist->item(0);
             foreach ($this->getContentModels() as $content_model_pid) {
@@ -229,7 +224,6 @@ EOCP;
   <language>
     <languageTerm authority="iso639-2b" type="code">eng</languageTerm>
   </language>
-  <abstract>$this->modsDescription</abstract>
   <identifier type="local">$this->pid</identifier>
 </mods>
 EOMODS;
@@ -251,8 +245,8 @@ EOMODS;
     }
 
     function validate_dsv_data($dsv_data) {
-        if (count($dsv_data) < 8) {
-            throw \Exception("There must be a minimum of 7 columns in the Delimiter Separated Value file");
+        if (count($dsv_data) != 5) {
+            throw new \Exception("There must be a minimum of 5 columns in the Delimiter Separated Value file");
         }
         if (strlen($dsv_data[0]) == 0) {
             throw new \Exception("The parent object identifier column must contain a value");
@@ -271,12 +265,6 @@ EOMODS;
         }
         if (strlen($dsv_data[4]) == 0) {
             throw new \Exception("The MODS description column must contain a value");
-        }
-        if (strlen($dsv_data[5]) == 0) {
-            throw new \Exception("The  MODS Type of Resource column must contain a value");
-        }
-        if (strlen($dsv_data[6]) == 0) {
-            throw new \Exception("The  collection must be assigned content models");
         }
     }
 
